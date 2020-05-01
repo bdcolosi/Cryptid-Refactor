@@ -21,15 +21,13 @@ const Sidebar = () => {
   return (
     <SideNav>
       <div>
-
         <form>
           <label>Channel name:</label><br></br>
           <input type="text"
             onChange={channelNameChanger}
-            name="channelname"/><br></br>
+            id="channelname"/><br></br>
         </form>
         <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
-
       </div>
       {channel.map((eaChannel, i) => (
         <SingleChannelWrapper
