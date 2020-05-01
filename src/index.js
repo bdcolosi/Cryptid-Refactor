@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import AppRouter from './AppRouter';
+import App from './App';
 import { Store } from './components/Store.jsx';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <Store>
+      <App/>
       <AppRouter />
     </Store>,
   document.getElementById('root')
