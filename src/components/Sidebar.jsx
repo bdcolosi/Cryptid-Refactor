@@ -2,6 +2,7 @@ import React from "react";
 import SingleChannel from "./SingleChannel";
 import styled from "styled-components";
 import { CTX } from "./Store";
+
 const Sidebar = () => {
   const { state, dispatch } = React.useContext(CTX);
 
@@ -9,8 +10,27 @@ const Sidebar = () => {
   const changeActiveChannel = (eaChannel) => {
     dispatch({ type: "SET_SELECTED_CHANNEL", payload: eaChannel });
   };
+  let newChannelName = "";
+  const channelNameChanger = e => {
+    newChannelName = e.target.value;
+    console.log(newChannelName);
+  }
+  const createChannel = (newChannelName) => {
+    dispatch({ type: "SET_CHANNEL_NAME", payload: newChannelName })
+  };
   return (
     <SideNav>
+      <div>
+
+        <form>
+          <label>Channel name:</label><br></br>
+          <input type="text"
+            onChange={channelNameChanger}
+            name="channelname"/><br></br>
+        </form>
+        <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
+
+      </div>
       {channel.map((eaChannel, i) => (
         <SingleChannelWrapper
           key={i}
