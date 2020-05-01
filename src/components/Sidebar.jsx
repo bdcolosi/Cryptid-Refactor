@@ -10,6 +10,11 @@ const Sidebar = () => {
   const changeActiveChannel = (eaChannel) => {
     dispatch({ type: "SET_SELECTED_CHANNEL", payload: eaChannel });
   };
+  const onKeyPressHandler = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  }
   let newChannelName = "";
   const channelNameChanger = e => {
     newChannelName = e.target.value;
@@ -20,15 +25,17 @@ const Sidebar = () => {
   };
   return (
     <SideNav>
-      <div>
-        <form>
-          <label>Channel name:</label><br></br>
+      <AddChannelWrapper>
+        <ChannelInputForm>
+          <Label>Channel name:</Label><br></br>
           <input type="text"
+            onKeyPress={onKeyPressHandler}
             onChange={channelNameChanger}
-            id="channelname"/><br></br>
-        </form>
+            /><br></br>
+        </ChannelInputForm>
         <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
-      </div>
+      </AddChannelWrapper>
+
       {channel.map((eaChannel, i) => (
         <SingleChannelWrapper
           key={i}
@@ -42,6 +49,14 @@ const Sidebar = () => {
     </SideNav>
   );
 };
+
+const AddChannelWrapper = styled.div``;
+
+const ChannelInputForm = styled.form``;
+
+const Label = styled.label`
+  color: white
+`;
 
 const SingleChannelWrapper = styled.button``;
 
