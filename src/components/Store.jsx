@@ -6,7 +6,7 @@ const initState = {
   selectedChannel: null,
   isVerified: false,
   socket: io(":3001"),
-  user: "RandomUser",
+  user: "Anonymous",
   allChats: null,
 };
 const reducer = (state, action) => {
