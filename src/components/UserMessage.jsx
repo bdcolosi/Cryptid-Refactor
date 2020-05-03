@@ -9,13 +9,8 @@ const UserMessage = () => {
         <div>
             <div>
                 {
-<<<<<<< HEAD
-                    state.allChats[state.selectedChannel].map((chat, i) => (
-                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p><Emoji text={chat.msg} /></p></UserMessageStyle></UserMessageWrapper>
-=======
-                    state.allChats  && state.allChats[state.selectedChannel].map((chat, i) => (
-                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p>{chat.msg}</p></UserMessageStyle></UserMessageWrapper>
->>>>>>> channellogin
+                    state.allChats  && state.allChats[state.selectedChannel].map((chat, i) => ( 
+                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p><Emoji text={chat.msg}/></p></UserMessageStyle></UserMessageWrapper>
                     ))
                 }
             </div>

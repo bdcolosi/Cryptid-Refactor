@@ -143,19 +143,6 @@ const Layout = styled.section`
     `;
 
 const Wrapper = styled.section`
-<<<<<<< HEAD
-      margin-top: auto;
-      margin-bottom: auto;
-      /* padding: 0.75rem 0 !important; */
-      overflow-y: auto;
-      white-space: nowrap;
-      border-radius: 15px 15px 0 0 !important;
-      border-bottom: 0 !important;
-      width: 100%;
-    margin-left: 1vw;
-    margin-right: 15vw;
-    `;
-=======
   margin-top: auto;
   margin-bottom: auto;
   height:100%;
@@ -168,7 +155,6 @@ const Wrapper = styled.section`
 margin-left: 1vw;
 margin-right: 15vw;
 `;
->>>>>>> channellogin
 
 const InnerBox = styled.section`
     text-align: center;
