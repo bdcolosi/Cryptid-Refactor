@@ -39,7 +39,14 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedChannel: action.payload,
+        isVerified: false,
       };
+
+    case "SET_USER_VALID":
+      return {
+        ...state,
+        isVerified: true,
+      }
     case "RECEIVE_MESSAGE":
       const { from, msg, channel } = action.payload;
       return {

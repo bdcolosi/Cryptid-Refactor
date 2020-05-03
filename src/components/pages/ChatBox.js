@@ -7,6 +7,8 @@ import { CTX } from '../Store'
 
 const ChatBox = () => {
   const [textValue, changeTextValue] = React.useState('');
+  const [passwordValue, setPasswordValue] = React.useState('');
+
 
   const { state, dispatch } = React.useContext(CTX);
   console.log(state.user)
@@ -20,6 +22,24 @@ const ChatBox = () => {
   }, [])
 
 
+  const submitPasswordHandler = async () => {
+    console.log("SELECTED CHANNEL", state.selectedChannel)
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+    },
+      body: JSON.stringify({channel: state.selectedChannel, password: passwordValue})
+    }
+    const response = await fetch('http://localhost:3001/login', requestOptions)
+
+    if(response.status === 200) {
+      dispatch('SET_USER_VALID')
+    }
+    setPasswordValue('');
+    
+    console.log('response',response)
+  }
 
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
@@ -59,7 +79,15 @@ const ChatBox = () => {
         selectedChannel ?
         <MyDiv>
           <div> Please login to channel: {selectedChannel}</div>
-
+          <input 
+            value={passwordValue} 
+            onChange={(e)=>{
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <button 
+            onClick={submitPasswordHandler}
+          >Submit</button>
         </MyDiv>
         :
         null
@@ -89,6 +117,7 @@ const Layout = styled.section`
 const Wrapper = styled.section`
   margin-top: auto;
   margin-bottom: auto;
+  height:100%;
   /* padding: 0.75rem 0 !important; */
   overflow-y: auto;
   white-space: nowrap;
