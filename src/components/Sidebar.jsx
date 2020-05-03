@@ -15,7 +15,11 @@ const Sidebar = () => {
   })
   }, [])
 
-  const channel = Object.keys(state.allChats);
+  let channel;
+
+  if(state.allChats){
+    channel = Object.keys(state.allChats);
+  }
   const changeActiveChannel = (eaChannel) => {
     dispatch("SET_SELECTED_CHANNEL", eaChannel );
   };
@@ -55,7 +59,7 @@ const Sidebar = () => {
         <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
       </AddChannelWrapper>
 
-      {channel.map((eaChannel, i) => (
+      {channel && channel.map((eaChannel, i) => (
         <SingleChannelWrapper
           key={i}
           onClick={() => {

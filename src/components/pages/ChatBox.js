@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Sidebar from "../Sidebar";
-import io from 'socket.io-client'
 import UserMessage from "../UserMessage";
 
 import { CTX } from '../Store'
@@ -35,13 +34,16 @@ const ChatBox = () => {
   const onChangeHandler = e => {
     changeTextValue(e.target.value);
   }
-
+  
+  const {isVerified, selectedChannel} = state;
+  console.log(state)
 
   return (
 
     <Layout>
       <Sidebar/>
       <Wrapper>
+      {isVerified ?
         <InnerBoxWrapper>
           <InnerBox>
             <UserMessage />
@@ -53,10 +55,25 @@ const ChatBox = () => {
             />
           </InnerBox>
         </InnerBoxWrapper>
+      :
+        selectedChannel ?
+        <MyDiv>
+          <div> Please login to channel: {selectedChannel}</div>
+
+        </MyDiv>
+        :
+        null
+      }
       </Wrapper>
     </Layout>
   )
 }
+
+const MyDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  background: purple;
+`;
 
 const Layout = styled.section`
   height: 100vh;

@@ -3,7 +3,7 @@ import io from "socket.io-client";
 export const CTX = React.createContext();
 
 const initState = {
-  selectedChannel: "general",
+  selectedChannel: null,
   isVerified: false,
   socket: io(":3001"),
   user: "RandomUser",
