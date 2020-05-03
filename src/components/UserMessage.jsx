@@ -4,12 +4,18 @@ import { Store, CTX } from './Store'
 import Emoji from "react-emoji-render";
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);
+    console.log(state.allChats)
     return (
         <div>
             <div>
                 {
+<<<<<<< HEAD
                     state.allChats[state.selectedChannel].map((chat, i) => (
                         <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p><Emoji text={chat.msg} /></p></UserMessageStyle></UserMessageWrapper>
+=======
+                    state.allChats  && state.allChats[state.selectedChannel].map((chat, i) => (
+                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p>{chat.msg}</p></UserMessageStyle></UserMessageWrapper>
+>>>>>>> channellogin
                     ))
                 }
             </div>

@@ -4,32 +4,62 @@ import styled from "styled-components";
 import { CTX } from "./Store";
 
 const Sidebar = () => {
+
   const { state, dispatch } = React.useContext(CTX);
 
-  const channel = Object.keys(state.allChats);
+  React.useEffect(() => {
+    console.log('SIDEBAR')
+    state.socket.on('channels', function (channels) {
+      console.log("channels recieved")
+      dispatch('RECEIVE_CHANNELS', channels);
+  })
+  }, [])
+
+  let channel;
+
+  if(state.allChats){
+    channel = Object.keys(state.allChats);
+  }
   const changeActiveChannel = (eaChannel) => {
-    dispatch({ type: "SET_SELECTED_CHANNEL", payload: eaChannel });
+    dispatch("SET_SELECTED_CHANNEL", eaChannel );
   };
+  const onKeyPressHandler = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+  }
   let newChannelName = "";
   const channelNameChanger = e => {
     newChannelName = e.target.value;
     console.log(newChannelName);
   }
+  let createPass = "";
+  const passwordHandler = e => {
+    createPass = e.target.value;
+    console.log(createPass);
+  }
   const createChannel = (newChannelName) => {
-    dispatch({ type: "SET_CHANNEL_NAME", payload: newChannelName })
+    dispatch("SET_CHANNEL_NAME", newChannelName )
   };
   return (
     <SideNav>
-      <div>
-        <form>
-          <label>Channel name:</label><br></br>
+      <AddChannelWrapper>
+        <ChannelInputForm>
+          <Label>Channel name:</Label><br></br>
           <input type="text"
+            onKeyPress={onKeyPressHandler}
             onChange={channelNameChanger}
-            id="channelname"/><br></br>
-        </form>
+            /><br></br>
+          <Label>Channel password:</Label><br></br>
+          <input type="text"
+            onKeyPress={onKeyPressHandler}
+            onChange={passwordHandler}
+          /><br></br>
+        </ChannelInputForm>
         <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
-      </div>
-      {channel.map((eaChannel, i) => (
+      </AddChannelWrapper>
+
+      {channel && channel.map((eaChannel, i) => (
         <SingleChannelWrapper
           key={i}
           onClick={() => {
@@ -42,6 +72,14 @@ const Sidebar = () => {
     </SideNav>
   );
 };
+
+const AddChannelWrapper = styled.div``;
+
+const ChannelInputForm = styled.form``;
+
+const Label = styled.label`
+  color: white
+`;
 
 const SingleChannelWrapper = styled.button``;
 

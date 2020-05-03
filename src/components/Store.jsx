@@ -3,17 +3,11 @@ import io from "socket.io-client";
 export const CTX = React.createContext();
 
 const initState = {
-  selectedChannel: "general",
+  selectedChannel: null,
+  isVerified: false,
   socket: io(":3001"),
-  user: "RandomUser",
-  allChats: {
-    general: [
-      { from: "user1", msg: "hello" },
-      { from: "user2", msg: "u stink" },
-      { from: "user3", msg: "some other words" },
-    ],
-    channel2: [{ from: "user1", msg: "hello" }],
-  },
+  user: "Anonymous",
+  allChats: null,
 };
 const reducer = (state, action) => {
   console.log(action);
@@ -36,15 +30,23 @@ const reducer = (state, action) => {
         }
       };
     case "SET_USER_NAME":
+      const newUserName = action.payload;
       return {
         ...state,
-        user: action.payload,
+        user: [newUserName],
       };
     case "SET_SELECTED_CHANNEL":
       return {
         ...state,
         selectedChannel: action.payload,
+        isVerified: false,
       };
+
+    case "SET_USER_VALID":
+      return {
+        ...state,
+        isVerified: true,
+      }
     case "RECEIVE_MESSAGE":
       const { from, msg, channel } = action.payload;
       return {
@@ -54,6 +56,18 @@ const reducer = (state, action) => {
           [channel]: [...state.allChats[state.selectedChannel], { from, msg }],
         },
       };
+    case "RECEIVE_CHANNELS":
+      const channels = action.payload;
+      const newObj = {};
+      console.log(channels)
+      channels.forEach(channel => {
+        newObj[channel.channel] = [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}];
+      })
+      return {
+        ...state,
+        allChats: newObj,
+        selectedChannel: channels[0].channel
+      }
     default:
       return state;
   }
@@ -67,9 +81,6 @@ export const Store = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initState);
 
   const myDispatch = (type, payload) => {
-    if (typeof type === "object" && type !== null) {
-      dispatch(type);
-    }
     dispatch({ type, payload });
   };
 

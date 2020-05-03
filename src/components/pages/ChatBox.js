@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Sidebar from "../Sidebar";
-import io from 'socket.io-client'
 import UserMessage from "../UserMessage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
@@ -15,6 +14,8 @@ import { CTX } from '../Store'
 
 const ChatBox = () => {
   const [textValue, changeTextValue] = React.useState('');
+  const [passwordValue, setPasswordValue] = React.useState('');
+
 
   const { state, dispatch } = React.useContext(CTX);
   console.log(state.user)
@@ -26,8 +27,33 @@ const ChatBox = () => {
       dispatch('RECEIVE_MESSAGE', msg);
     })
   }, [])
+  
+  let newUserName = ""
+  const userNameChanger = e => {
+    newUserName = e.target.value;
+    console.log(newUserName);
+  }
+  const usernameCreator = (newUserName) => {
+    dispatch('SET_USER_NAME', newUserName)
+  };
+  const submitPasswordHandler = async () => {
+    console.log("SELECTED CHANNEL", state.selectedChannel)
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+    },
+      body: JSON.stringify({channel: state.selectedChannel, password: passwordValue})
+    }
+    const response = await fetch('http://localhost:3001/login', requestOptions)
 
-
+    if(response.status === 200) {
+      dispatch('SET_USER_VALID')
+    }
+    setPasswordValue('');
+    
+    console.log('response',response)
+  }
 
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
@@ -42,13 +68,16 @@ const ChatBox = () => {
   const onChangeHandler = e => {
     changeTextValue(e.target.value);
   }
-
+  
+  const {isVerified, selectedChannel} = state;
+  console.log(state)
 
   return (
 
     <Layout>
       <Sidebar />
       <Wrapper>
+      {isVerified ?
         <InnerBoxWrapper>
           <InnerBox>
             <UserMessage />
@@ -65,10 +94,42 @@ const ChatBox = () => {
             </InputWrapper>
           </InnerBox>
         </InnerBoxWrapper>
+      :
+        selectedChannel ?
+        <MyDiv>
+          <div> Please login to channel: {selectedChannel}</div>
+          <input 
+            value={passwordValue} 
+            onChange={(e)=>{
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <button 
+            onClick={submitPasswordHandler}
+          >Submit</button>
+          <div> Want to set your username for channel {selectedChannel}?</div>
+          <input 
+            onChange={userNameChanger}
+            
+          />
+          <button 
+            onClick={() => {
+              usernameCreator(newUserName)}}
+          >Submit</button>
+        </MyDiv>
+        :
+        null
+      }
       </Wrapper>
     </Layout>
   )
 }
+
+const MyDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  background: purple;
+`;
 
 const Layout = styled.section`
       height: 100vh;
@@ -82,6 +143,7 @@ const Layout = styled.section`
     `;
 
 const Wrapper = styled.section`
+<<<<<<< HEAD
       margin-top: auto;
       margin-bottom: auto;
       /* padding: 0.75rem 0 !important; */
@@ -93,6 +155,20 @@ const Wrapper = styled.section`
     margin-left: 1vw;
     margin-right: 15vw;
     `;
+=======
+  margin-top: auto;
+  margin-bottom: auto;
+  height:100%;
+  /* padding: 0.75rem 0 !important; */
+  overflow-y: auto;
+  white-space: nowrap;
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+  width: 100%;
+margin-left: 1vw;
+margin-right: 15vw;
+`;
+>>>>>>> channellogin
 
 const InnerBox = styled.section`
     text-align: center;
