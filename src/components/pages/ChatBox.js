@@ -20,8 +20,15 @@ const ChatBox = () => {
       dispatch('RECEIVE_MESSAGE', msg);
   })
   }, [])
-
-
+  
+  let newUserName = ""
+  const userNameChanger = e => {
+    newUserName = e.target.value;
+    console.log(newUserName);
+  }
+  const usernameCreator = (newUserName) => {
+    dispatch('SET_USER_NAME', newUserName)
+  };
   const submitPasswordHandler = async () => {
     console.log("SELECTED CHANNEL", state.selectedChannel)
     const requestOptions = {
@@ -87,6 +94,15 @@ const ChatBox = () => {
           />
           <button 
             onClick={submitPasswordHandler}
+          >Submit</button>
+          <div> Want to set your username for channel {selectedChannel}?</div>
+          <input 
+            onChange={userNameChanger}
+            
+          />
+          <button 
+            onClick={() => {
+              usernameCreator(newUserName)}}
           >Submit</button>
         </MyDiv>
         :
