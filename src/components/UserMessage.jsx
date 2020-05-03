@@ -4,11 +4,12 @@ import { Store, CTX } from './Store'
 
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);
+    console.log(state.allChats)
     return (
         <div>
             <div>
                 {
-                    state.allChats[state.selectedChannel].map((chat, i) => (
+                    state.allChats  && state.allChats[state.selectedChannel].map((chat, i) => (
                         <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p>{chat.msg}</p></UserMessageStyle></UserMessageWrapper>
                     ))
                 }

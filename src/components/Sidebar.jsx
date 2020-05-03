@@ -4,11 +4,20 @@ import styled from "styled-components";
 import { CTX } from "./Store";
 
 const Sidebar = () => {
+
   const { state, dispatch } = React.useContext(CTX);
+
+  React.useEffect(() => {
+    console.log('SIDEBAR')
+    state.socket.on('channels', function (channels) {
+      console.log("channels recieved")
+      dispatch('RECEIVE_CHANNELS', channels);
+  })
+  }, [])
 
   const channel = Object.keys(state.allChats);
   const changeActiveChannel = (eaChannel) => {
-    dispatch({ type: "SET_SELECTED_CHANNEL", payload: eaChannel });
+    dispatch("SET_SELECTED_CHANNEL", eaChannel );
   };
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
@@ -20,8 +29,13 @@ const Sidebar = () => {
     newChannelName = e.target.value;
     console.log(newChannelName);
   }
+  let createPass = "";
+  const passwordHandler = e => {
+    createPass = e.target.value;
+    console.log(createPass);
+  }
   const createChannel = (newChannelName) => {
-    dispatch({ type: "SET_CHANNEL_NAME", payload: newChannelName })
+    dispatch("SET_CHANNEL_NAME", newChannelName )
   };
   return (
     <SideNav>
@@ -32,6 +46,11 @@ const Sidebar = () => {
             onKeyPress={onKeyPressHandler}
             onChange={channelNameChanger}
             /><br></br>
+          <Label>Channel password:</Label><br></br>
+          <input type="text"
+            onKeyPress={onKeyPressHandler}
+            onChange={passwordHandler}
+          /><br></br>
         </ChannelInputForm>
         <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
       </AddChannelWrapper>
