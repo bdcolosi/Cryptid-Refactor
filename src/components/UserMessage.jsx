@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import { Store, CTX } from './Store'
-
+import Emoji from "react-emoji-render";
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);
     return (
@@ -9,7 +9,7 @@ const UserMessage = () => {
             <div>
                 {
                     state.allChats[state.selectedChannel].map((chat, i) => (
-                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p>{chat.msg}</p></UserMessageStyle></UserMessageWrapper>
+                        <UserMessageWrapper key={i}> <UserName><p>{chat.from}</p></UserName><UserMessageStyle><p><Emoji text={chat.msg} /></p></UserMessageStyle></UserMessageWrapper>
                     ))
                 }
             </div>
