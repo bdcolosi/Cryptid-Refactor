@@ -50,7 +50,9 @@ const Sidebar = () => {
     if(response.status === 200){
 
       console.log("yup")
+      dispatch("SET_CHANNEL_NAME", channelValue)
     }
+    setChannelValue('')
     console.log(response)
   }
   return (
