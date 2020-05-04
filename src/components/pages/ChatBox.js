@@ -100,7 +100,9 @@ const ChatBox = () => {
         selectedChannel ?
         <MyDiv>
           <WrapperLogin>
+          <Title>Welcome to Cryptid!</Title>
           <img src={monster} alt="monster logo"></img>
+          <PleaseTitle>Please login to:</PleaseTitle>
           <PleaseLogin>{selectedChannel}</PleaseLogin>
           <PleaseLoginInput
             value={passwordValue} 
@@ -113,7 +115,6 @@ const ChatBox = () => {
           <PleaseLoginButton
             onClick={submitPasswordHandler}
           >Submit</PleaseLoginButton>
-          <br></br>
           <SetUsernameLabel>You are: {state.user}</SetUsernameLabel>
           <SetUsernameInput 
             onChange={userNameChanger}
@@ -134,6 +135,18 @@ const ChatBox = () => {
   )
 }
 
+const PleaseTitle = styled.div`
+  font-size: 18px;
+  padding-top: 5px;
+  font-family: 'Creepster', cursive;
+`;
+
+const Title = styled.div`
+  font-family: 'Creepster', cursive;
+  padding-bottom: 5px;
+  font-size: 64px;
+`;
+
 const AllUserMessages = styled.div`
   
 `;
@@ -141,7 +154,7 @@ const AllUserMessages = styled.div`
 const MyDiv = styled.div`
   height: 100%;
   width: 100%;
-  background: rgb(0, 0, 0, 0.9);
+  background: rgb(0, 0, 0, 1);
   display: flex;
   justify-content: center;
 `;
@@ -151,7 +164,7 @@ const WrapperLogin = styled.div`
   flex-direction: column;
   text-align: center;
   width: 30%;
-  margin-top: 100px;
+  margin-top: 60px;
   color: white;
   font-size:48px;
   width: 100%;
@@ -160,7 +173,6 @@ const WrapperLogin = styled.div`
 `;
 
 const PleaseLogin = styled.div`
-padding-bottom: 20px;
 font-family: 'Creepster', cursive;
 `;
 
@@ -187,7 +199,7 @@ const PleaseLoginButton = styled.button`
   text-align:center;
   transition: all 0.2s;
   margin-top: 2px;
-  margin-bottom: 2px;
+  margin-bottom: 10px;
   padding: 5px 32px;
   width: 200px;
 
@@ -199,6 +211,7 @@ const PleaseLoginButton = styled.button`
 
 const SetUsernameLabel = styled.div`
   font-family: 'Creepster', cursive;
+  font-size: 24px;
 `;
 
 const SetUsernameInput = styled.input`

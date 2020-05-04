@@ -111,7 +111,7 @@ font-family:'Roboto',sans-serif;
 
 const Label = styled.label`
   color: white;
-  font-family:'Roboto',sans-serif;
+  font-family: 'Creepster', cursive;
 `;
 
 const SingleChannelWrapper = styled.button`
@@ -149,7 +149,7 @@ const SideNav = styled.div`
   display: flex;
   width: 240px;
   flex-direction: column;
-  background-color: black;
+  background-color: rgb(0, 0, 0, 0.7);
   border-radius: 15px !important;
   @media only screen and (min-width: 50px) and (max-width: 530px) {
     margin: 0px;
