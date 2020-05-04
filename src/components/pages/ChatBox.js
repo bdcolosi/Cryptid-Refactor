@@ -287,13 +287,15 @@ const InnerBox = styled.section`
 const InnerBoxWrapper = styled.section`
       display: flex;
       height: 100vh;
+      width: 100%;
       background: black;
       opacity: 0.5;
     
     `;
 
 const InputWrapper = styled.div`
-  width: 96vw;
+  width: 98%;
+  padding-bottom: 2px;
     `
 
 // const InputAddons = styled.div`
