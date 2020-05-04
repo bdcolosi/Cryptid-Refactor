@@ -87,7 +87,7 @@ const ChatBox = () => {
               <UserMessage/>
             </AllUserMessages>
             <InputWrapper>
-              <input
+              <TheInput
                 label="Send a chat"
                 onChange={onChangeHandler}
                 value={textValue}
@@ -135,6 +135,16 @@ const ChatBox = () => {
   )
 }
 
+const TheInput = styled.input`
+  border:0.1em solid #FFFFFF;
+  border-radius: 64px;
+  width: 100%;
+  height: 20px;
+  margin-left: 3px;
+  font-size: 20px;
+`
+
+
 const PleaseTitle = styled.div`
   font-size: 18px;
   padding-top: 5px;
@@ -148,7 +158,8 @@ const Title = styled.div`
 `;
 
 const AllUserMessages = styled.div`
-  
+  padding-bottom: 12px;
+  padding-left: 6px;
 `;
 
 const MyDiv = styled.div`
@@ -249,7 +260,6 @@ const SetUsernameButton = styled.button`
 const Layout = styled.section`
       height: 100vh;
       margin: 0;
-      border-radius: 15px !important;
       background-color: #b60a1c;
       display: flex;
     `;
@@ -265,7 +275,7 @@ const Wrapper = styled.section`
   border-bottom: 0 !important;
   width: 100%;
   margin-left: 1vw;
-  margin-right: 15vw;
+  margin-right: 1vw;
 `;
 
 const InnerBox = styled.section`
@@ -276,15 +286,14 @@ const InnerBox = styled.section`
 
 const InnerBoxWrapper = styled.section`
       display: flex;
-      height: 90vh;
+      height: 100vh;
       background: black;
       opacity: 0.5;
     
     `;
 
 const InputWrapper = styled.div`
-display: flex;
-justify-content: center;
+  width: 96vw;
     `
 
 // const InputAddons = styled.div`

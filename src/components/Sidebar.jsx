@@ -149,8 +149,8 @@ const SideNav = styled.div`
   display: flex;
   width: 240px;
   flex-direction: column;
-  background-color: rgb(0, 0, 0, 0.7);
-  border-radius: 15px !important;
+  background-color: rgb(0, 0, 0, 1);
+  border-radius: 15px 15px 0 0 !important;
   @media only screen and (min-width: 50px) and (max-width: 530px) {
     margin: 0px;
     align-items: center;

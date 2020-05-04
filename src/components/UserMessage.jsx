@@ -23,6 +23,7 @@ color: white;
 height: 50px;
 width: 50px;
 margin-right: 50px;
+font-size: 20px;
 `
 
 const UserMessageWrapper = styled.div`
@@ -35,6 +36,7 @@ background-color: (155, 155, 155, 0.95);
 
 const UserMessageStyle = styled.div`
 color: white;
+font-size: 20px;
 
 
 `
