@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { CTX } from "./Store";
 
 const Sidebar = () => {
-
   const { state, dispatch } = React.useContext(CTX);
+  const [channelValue, setChannelValue] = React.useState('');
+  const [passwordValue, setPasswordValue] = React.useState('');
 
   React.useEffect(() => {
     console.log('SIDEBAR')
@@ -28,35 +29,48 @@ const Sidebar = () => {
       e.preventDefault();
     }
   }
-  let newChannelName = "";
   const channelNameChanger = e => {
-    newChannelName = e.target.value;
-    console.log(newChannelName);
+    setChannelValue(e.target.value);
   }
-  let createPass = "";
   const passwordHandler = e => {
-    createPass = e.target.value;
-    console.log(createPass);
+    setPasswordValue(e.target.value)
   }
-  const createChannel = (newChannelName) => {
-    dispatch("SET_CHANNEL_NAME", newChannelName )
-  };
+
+  const createChannel = async () => {
+    console.log("yup")
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+    },
+      body: JSON.stringify({channel: channelValue, password: passwordValue})
+    }
+    
+    const response = await fetch('http://localhost:3001/putchannel', requestOptions)
+    if(response.status === 200){
+
+      console.log("yup")
+    }
+    console.log(response)
+  }
   return (
     <SideNav>
       <AddChannelWrapper>
         <ChannelInputForm>
           <Label>Channel name:</Label><br></br>
           <input type="text"
+            value={channelValue}
             onKeyPress={onKeyPressHandler}
             onChange={channelNameChanger}
             /><br></br>
           <Label>Channel password:</Label><br></br>
           <input type="text"
+            value={passwordValue}
             onKeyPress={onKeyPressHandler}
             onChange={passwordHandler}
           /><br></br>
         </ChannelInputForm>
-        <button onClick={() => {createChannel(newChannelName)}}>Add channel</button> 
+        <button onClick={createChannel}>Add channel</button> 
       </AddChannelWrapper>
 
       {channel && channel.map((eaChannel, i) => (
@@ -84,6 +98,7 @@ const Label = styled.label`
 const SingleChannelWrapper = styled.button``;
 
 const SideNav = styled.div`
+  overflow-y:scroll;
   display: flex;
   width: 240px;
   flex-direction: column;

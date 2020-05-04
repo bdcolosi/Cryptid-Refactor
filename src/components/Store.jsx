@@ -26,7 +26,8 @@ const reducer = (state, action) => {
         ...state,
         allChats: {
           ...state.allChats,
-          newChannel: [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}]
+          newChannel: [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}],
+          newPassword: "",
         }
       };
     case "SET_USER_NAME":
