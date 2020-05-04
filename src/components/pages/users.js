@@ -16,4 +16,4 @@ const TestApi = (props) => {
 
 
 
-export default TestApi;
+export default TestApi
