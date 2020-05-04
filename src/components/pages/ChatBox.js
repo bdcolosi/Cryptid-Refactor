@@ -4,7 +4,7 @@ import Sidebar from "../Sidebar";
 import UserMessage from "../UserMessage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import InputAddon from '../InputAddon'
+
 
 
 
@@ -27,7 +27,7 @@ const ChatBox = () => {
       dispatch('RECEIVE_MESSAGE', msg);
     })
   }, [])
-  
+
   let newUserName = ""
   const userNameChanger = e => {
     newUserName = e.target.value;
@@ -42,17 +42,17 @@ const ChatBox = () => {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
-    },
-      body: JSON.stringify({channel: state.selectedChannel, password: passwordValue})
+      },
+      body: JSON.stringify({ channel: state.selectedChannel, password: passwordValue })
     }
     const response = await fetch('http://localhost:3001/login', requestOptions)
 
-    if(response.status === 200) {
+    if (response.status === 200) {
       dispatch('SET_USER_VALID')
     }
     setPasswordValue('');
-    
-    console.log('response',response)
+
+    console.log('response', response)
   }
 
 
@@ -70,8 +70,8 @@ const ChatBox = () => {
   const onChangeHandler = e => {
     changeTextValue(e.target.value);
   }
-  
-  const {isVerified, selectedChannel} = state;
+
+  const { isVerified, selectedChannel } = state;
   console.log(state)
 
   return (
@@ -79,52 +79,50 @@ const ChatBox = () => {
     <Layout>
       <Sidebar />
       <Wrapper>
-      {isVerified ?
-        <InnerBoxWrapper>
-          <InnerBox>
-            <UserMessage />
-            <InputWrapper>
-              <InputAddons id="InputAddon">
-                <FontAwesomeIcon icon={faPlus} onClick={InputAddon}></FontAwesomeIcon>
-              </InputAddons>
-              <input
-                label="Send a chat"
-                onChange={onChangeHandler}
-                value={textValue}
-                onKeyPress={onKeyPressHandler}
-              />
-            </InputWrapper>
-          </InnerBox>
-        </InnerBoxWrapper>
-      :
-        selectedChannel ?
-        <MyDiv>
-          <WrapperLogin>
-          <PleaseLogin> Please login to channel: {selectedChannel}</PleaseLogin>
-          <PleaseLoginInput
-            value={passwordValue} 
-            onChange={(e)=>{
-              setPasswordValue(e.target.value)
-            }}
-          />
-          <PleaseLoginButton
-            onClick={submitPasswordHandler}
-          >Submit</PleaseLoginButton>
-          <SetUsernameLabel> Want to set your username for channel {selectedChannel}?</SetUsernameLabel>
-          <SetUsernameInput 
-            onChange={userNameChanger}
-            
-          />
-          <SetUsernameButton
-            onClick={() => {
-              usernameCreator(newUserName)}}
-          >Submit</SetUsernameButton>
-          </WrapperLogin>
-        </MyDiv>
-        
-        :
-        null
-      }
+        {isVerified ?
+          <InnerBoxWrapper>
+            <InnerBox>
+              <UserMessage />
+              <InputWrapper>
+                <Input
+                  label="Send a chat"
+                  onChange={onChangeHandler}
+                  value={textValue}
+                  onKeyPress={onKeyPressHandler}
+                />
+              </InputWrapper>
+            </InnerBox>
+          </InnerBoxWrapper>
+          :
+          selectedChannel ?
+            <MyDiv>
+              <WrapperLogin>
+                <PleaseLogin> Please login to channel: {selectedChannel}</PleaseLogin>
+                <PleaseLoginInput
+                  value={passwordValue}
+                  onChange={(e) => {
+                    setPasswordValue(e.target.value)
+                  }}
+                />
+                <PleaseLoginButton
+                  onClick={submitPasswordHandler}
+                >Submit</PleaseLoginButton>
+                <SetUsernameLabel> Want to set your username for channel {selectedChannel}?</SetUsernameLabel>
+                <SetUsernameInput
+                  onChange={userNameChanger}
+
+                />
+                <SetUsernameButton
+                  onClick={() => {
+                    usernameCreator(newUserName)
+                  }}
+                >Submit</SetUsernameButton>
+              </WrapperLogin>
+            </MyDiv>
+
+            :
+            null
+        }
       </Wrapper>
     </Layout>
   )
@@ -210,12 +208,19 @@ justify-content: center;
 
 const InputAddons = styled.div`
 margin-right: 3px;
-
 height: 16px;
 width: 14px;
 color: white;
     `
 
-
+const Input = styled.input`
+  background-color: gray;
+  color: ${props => props.inputColor || "white"};
+  border-radius: 5px;
+  opacity: 10 !important; 
+  height: 3vh;
+  width: 20vw;
+margin: 5px;
+`;
 const MessageBox = styled.input``;
 export default ChatBox;
