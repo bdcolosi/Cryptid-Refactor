@@ -16,7 +16,7 @@ We used socket.io to build the main user functions of this project, and do not s
 
 ![react](public/images/Group.png)
 
-Our team use React, Express, bcrypt, PostgresSQL, Node.js, and Styled Components.
+Our team used React, Express, bcrypt, PostgresSQL, Node.js, and Styled Components.
 
 ##CHALLENGES AND SOLUTIONS
 
