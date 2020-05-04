@@ -55,6 +55,8 @@ const ChatBox = () => {
     console.log('response', response)
   }
 
+
+
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -94,27 +96,30 @@ const ChatBox = () => {
           :
           selectedChannel ?
             <MyDiv>
-              <div> Please login to channel: {selectedChannel}</div>
-              <input
-                value={passwordValue}
-                onChange={(e) => {
-                  setPasswordValue(e.target.value)
-                }}
-              />
-              <button
-                onClick={submitPasswordHandler}
-              >Submit</button>
-              <div> Want to set your username for channel {selectedChannel}?</div>
-              <input
-                onChange={userNameChanger}
+              <WrapperLogin>
+                <PleaseLogin> Please login to channel: {selectedChannel}</PleaseLogin>
+                <PleaseLoginInput
+                  value={passwordValue}
+                  onChange={(e) => {
+                    setPasswordValue(e.target.value)
+                  }}
+                />
+                <PleaseLoginButton
+                  onClick={submitPasswordHandler}
+                >Submit</PleaseLoginButton>
+                <SetUsernameLabel> Want to set your username for channel {selectedChannel}?</SetUsernameLabel>
+                <SetUsernameInput
+                  onChange={userNameChanger}
 
-              />
-              <button
-                onClick={() => {
-                  usernameCreator(newUserName)
-                }}
-              >Submit</button>
+                />
+                <SetUsernameButton
+                  onClick={() => {
+                    usernameCreator(newUserName)
+                  }}
+                >Submit</SetUsernameButton>
+              </WrapperLogin>
             </MyDiv>
+
             :
             null
         }
@@ -127,6 +132,34 @@ const MyDiv = styled.div`
   height: 100%;
   width: 100%;
   background: purple;
+  display: flex;
+  justify-content: center;
+`;
+
+const WrapperLogin = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 30%;
+  margin-top: 100px;
+`;
+
+const PleaseLogin = styled.div`
+`;
+
+const PleaseLoginInput = styled.input`
+`;
+
+const PleaseLoginButton = styled.button`
+`;
+
+const SetUsernameLabel = styled.div`
+`;
+
+const SetUsernameInput = styled.input`
+`;
+
+const SetUsernameButton = styled.button`
 `;
 
 const Layout = styled.section`
@@ -150,8 +183,8 @@ const Wrapper = styled.section`
   border-radius: 15px 15px 0 0 !important;
   border-bottom: 0 !important;
   width: 100%;
-margin-left: 1vw;
-margin-right: 15vw;
+  margin-left: 1vw;
+  margin-right: 15vw;
 `;
 
 const InnerBox = styled.section`
