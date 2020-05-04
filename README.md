@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CRYPTID CHAT- ANONYMOUS CHAT MESSAGING APP (BEWARE)!!!
 
-## Available Scripts
 
-In the project directory, you can run:
+##WHAT IT IS 
 
-### `npm start`
+cryptid noun
+cryp·​tid | \ ˈkrip-təd\
+Definition of cryptid
+: an animal (such as Sasquatch or the Loch Ness Monster) that has been claimed to exist but never proven to exist.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This is a final project, messaging app that allows users to create a chatroom with a password(hashed by bcrypt), and can input any username they want or choose to be anonymous. No login or information is required. The user can then share the chatroom password to friends or others they want to talk to. All chatrooms are not saved, and no information is shared. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+We used socket.io to build the main user functions of this project, and do not store any chat info. Our goal was to make users feel safe within a chat, and to make the user or the content of a chat anonymous or like it never exsisted. 
 
-### `npm test`
+##WHAT WE USED 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![react](public/images/Group.png)
 
-### `npm run build`
+Our team use React, Express, bcrypt, PostgresSQL, Node.js, and Styled Components.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+##CHALLENGES AND SOLUTIONS
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Challenge 1
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+As we discussed the project in the beginning and were inspired by new technologies avaiable to us,we first started the project in NEXT.js. After working with it for a few days we had problems with some of it's features and working with our global state in the framework. We also were having issues rendering our css and styled components due to the static html. We soon realized we bit off more than we could chew and had to backtrack to refactor our project in create-react-app. We quickly refactored, although it did put us back a few days. 
 
-### `npm run eject`
+Challenge 2
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+After refactoring our app we dove into more user features such as adding multipule channels, password protected chats (bcrypt), and adding an input for a username or alias. 
+We ran into an issue adding the channels feature,which was eventually solved by debugging and seeing a bug in the global state. YAY debugging!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+##Authors 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Aaron Smith, Paxton Lindsey, and Brooke Colosi 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+##SCREENSHOTS
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
