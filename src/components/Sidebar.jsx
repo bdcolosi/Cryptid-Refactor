@@ -58,17 +58,18 @@ const Sidebar = () => {
     <SideNav>
       <AddChannelWrapper>
         <ChannelInputForm>
-          <Label>Channel name:</Label><br></br>
+          <Label>Add a channel?</Label><br></br>
           <input type="text"
             value={channelValue}
             onKeyPress={onKeyPressHandler}
             onChange={channelNameChanger}
+            placeholder="Channel name"
           /><br></br>
-          <Label>Channel password:</Label><br></br>
-          <input type="text"
+          <input type="password"
             value={passwordValue}
             onKeyPress={onKeyPressHandler}
             onChange={passwordHandler}
+            placeholder="Password"
           /><br></br>
         </ChannelInputForm>
         <ButtonWrapper onClick={createChannel}>
@@ -94,21 +95,27 @@ const Sidebar = () => {
 
 const AllSingleChannels = styled.div`
   overflow-y: scroll;
+  text-align: center;
 `;
 
 
 const AddChannelWrapper = styled.div`
 align-self: center;
+padding-bottom: 10px;
+padding-top: 5px;
 `;
 
-const ChannelInputForm = styled.form``;
+const ChannelInputForm = styled.form`
+font-family:'Roboto',sans-serif;
+`;
 
 const Label = styled.label`
   color: white;
+  font-family:'Roboto',sans-serif;
 `;
 
 const SingleChannelWrapper = styled.button`
-  width: 100%;
+  width: 80%;
 `;
 
 const ButtonWrapper = styled.button`
@@ -142,7 +149,7 @@ const SideNav = styled.div`
   display: flex;
   width: 240px;
   flex-direction: column;
-  background-color: rgba(0,0,0,0.5);
+  background-color: black;
   border-radius: 15px !important;
   @media only screen and (min-width: 50px) and (max-width: 530px) {
     margin: 0px;

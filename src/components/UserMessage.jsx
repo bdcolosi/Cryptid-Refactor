@@ -28,8 +28,9 @@ margin-right: 50px;
 const UserMessageWrapper = styled.div`
 display: flex;
 height: 40px;
-width: 500px;
+width: 100%;
 color: white;
+background-color: (155, 155, 155, 0.95);
 `
 
 const UserMessageStyle = styled.div`

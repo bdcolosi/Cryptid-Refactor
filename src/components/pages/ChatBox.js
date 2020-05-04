@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Sidebar from "../Sidebar";
 import UserMessage from "../UserMessage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import monster from "../monster3.png"
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faPlus } from '@fortawesome/free-solid-svg-icons'
+// import InputAddon from '../InputAddon'
 
 
 
@@ -27,7 +28,7 @@ const ChatBox = () => {
       dispatch('RECEIVE_MESSAGE', msg);
     })
   }, [])
-
+  
   let newUserName = ""
   const userNameChanger = e => {
     newUserName = e.target.value;
@@ -42,17 +43,17 @@ const ChatBox = () => {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ channel: state.selectedChannel, password: passwordValue })
+    },
+      body: JSON.stringify({channel: state.selectedChannel, password: passwordValue})
     }
     const response = await fetch('http://localhost:3001/login', requestOptions)
 
-    if (response.status === 200) {
+    if(response.status === 200) {
       dispatch('SET_USER_VALID')
     }
     setPasswordValue('');
-
-    console.log('response', response)
+    
+    console.log('response',response)
   }
 
 
@@ -70,8 +71,8 @@ const ChatBox = () => {
   const onChangeHandler = e => {
     changeTextValue(e.target.value);
   }
-
-  const { isVerified, selectedChannel } = state;
+  
+  const {isVerified, selectedChannel} = state;
   console.log(state)
 
   return (
@@ -79,59 +80,68 @@ const ChatBox = () => {
     <Layout>
       <Sidebar />
       <Wrapper>
-        {isVerified ?
-          <InnerBoxWrapper>
-            <InnerBox>
-              <UserMessage />
-              <InputWrapper>
-                <Input
-                  label="Send a chat"
-                  onChange={onChangeHandler}
-                  value={textValue}
-                  onKeyPress={onKeyPressHandler}
-                />
-              </InputWrapper>
-            </InnerBox>
-          </InnerBoxWrapper>
-          :
-          selectedChannel ?
-            <MyDiv>
-              <WrapperLogin>
-                <PleaseLogin> Please login to channel: {selectedChannel}</PleaseLogin>
-                <PleaseLoginInput
-                  value={passwordValue}
-                  onChange={(e) => {
-                    setPasswordValue(e.target.value)
-                  }}
-                />
-                <PleaseLoginButton
-                  onClick={submitPasswordHandler}
-                >Submit</PleaseLoginButton>
-                <SetUsernameLabel> Want to set your username for channel {selectedChannel}?</SetUsernameLabel>
-                <SetUsernameInput
-                  onChange={userNameChanger}
-
-                />
-                <SetUsernameButton
-                  onClick={() => {
-                    usernameCreator(newUserName)
-                  }}
-                >Submit</SetUsernameButton>
-              </WrapperLogin>
-            </MyDiv>
-
-            :
-            null
-        }
+      {isVerified ?
+        <InnerBoxWrapper>
+          <InnerBox>
+            <AllUserMessages>
+              <UserMessage/>
+            </AllUserMessages>
+            <InputWrapper>
+              <input
+                label="Send a chat"
+                onChange={onChangeHandler}
+                value={textValue}
+                onKeyPress={onKeyPressHandler}
+              />
+            </InputWrapper>
+          </InnerBox>
+        </InnerBoxWrapper>
+      :
+        selectedChannel ?
+        <MyDiv>
+          <WrapperLogin>
+          <img src={monster} alt="monster logo"></img>
+          <PleaseLogin>{selectedChannel}</PleaseLogin>
+          <PleaseLoginInput
+            value={passwordValue} 
+            type="password"
+            placeholder="Enter the password"
+            onChange={(e)=>{
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <PleaseLoginButton
+            onClick={submitPasswordHandler}
+          >Submit</PleaseLoginButton>
+          <br></br>
+          <SetUsernameLabel>You are: {state.user}</SetUsernameLabel>
+          <SetUsernameInput 
+            onChange={userNameChanger}
+            placeholder="Change username"
+          />
+          <SetUsernameButton
+            onClick={() => {
+              usernameCreator(newUserName)}}
+          >Submit</SetUsernameButton>
+          </WrapperLogin>
+        </MyDiv>
+        
+        :
+        null
+      }
       </Wrapper>
     </Layout>
   )
 }
 
+const AllUserMessages = styled.div`
+  
+`;
+
 const MyDiv = styled.div`
   height: 100%;
   width: 100%;
-  background: purple;
+  background: rgb(0, 0, 0, 0.9);
   display: flex;
   justify-content: center;
 `;
@@ -142,34 +152,92 @@ const WrapperLogin = styled.div`
   text-align: center;
   width: 30%;
   margin-top: 100px;
+  color: white;
+  font-size:48px;
+  width: 100%;
+  align-items: center;
+  font-family:'Roboto',sans-serif;
 `;
 
 const PleaseLogin = styled.div`
+padding-bottom: 20px;
+font-family: 'Creepster', cursive;
 `;
 
 const PleaseLoginInput = styled.input`
+  width: 200px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-family:'Roboto',sans-serif;
 `;
 
 const PleaseLoginButton = styled.button`
+  align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+  width: 200px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 
 const SetUsernameLabel = styled.div`
+  font-family: 'Creepster', cursive;
 `;
 
 const SetUsernameInput = styled.input`
+  width: 200px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
 `;
 
 const SetUsernameButton = styled.button`
+  align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+  width: 200px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 
 const Layout = styled.section`
       height: 100vh;
       margin: 0;
-      background: #7f7fd5;
-      background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-      background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
       border-radius: 15px !important;
-      background-color: rgba(0, 0, 0, 0.4) !important;
+      background-color: #b60a1c;
       display: flex;
     `;
 
@@ -196,7 +264,8 @@ const InnerBox = styled.section`
 const InnerBoxWrapper = styled.section`
       display: flex;
       height: 90vh;
-      background-color: rgba(0,0,0,0.5);
+      background: black;
+      opacity: 0.5;
     
     `;
 
@@ -205,21 +274,13 @@ display: flex;
 justify-content: center;
     `
 
-const InputAddons = styled.div`
-margin-right: 3px;
-height: 16px;
-width: 14px;
-color: white;
-    `
+// const InputAddons = styled.div`
+// margin-right: 3px;
+// height: 16px;
+// width: 14px;
+// color: white;
+//     `;
 
-const Input = styled.input`
-  background-color: gray;
-  color: ${props => props.inputColor || "white"};
-  border-radius: 5px;
-  opacity: 10 !important; 
-  height: 3vh;
-  width: 20vw;
-margin: 5px;
-`;
+
 const MessageBox = styled.input``;
 export default ChatBox;
