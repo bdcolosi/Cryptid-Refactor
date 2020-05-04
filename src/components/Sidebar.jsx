@@ -76,7 +76,7 @@ const Sidebar = () => {
         </ButtonWrapper>
 
       </AddChannelWrapper>
-
+      <AllSingleChannels>
       {channel && channel.map((eaChannel, i) => (
         <SingleChannelWrapper
           key={i}
@@ -87,9 +87,15 @@ const Sidebar = () => {
           <SingleChannel eachChannel={eaChannel} key={i} />
         </SingleChannelWrapper>
       ))}
+      </AllSingleChannels>
     </SideNav>
   );
 };
+
+const AllSingleChannels = styled.div`
+  overflow-y: scroll;
+`;
+
 
 const AddChannelWrapper = styled.div`
 align-self: center;
@@ -98,25 +104,27 @@ align-self: center;
 const ChannelInputForm = styled.form``;
 
 const Label = styled.label`
-  color: white
+  color: white;
 `;
 
-const SingleChannelWrapper = styled.button``;
+const SingleChannelWrapper = styled.button`
+  width: 100%;
+`;
 
 const ButtonWrapper = styled.button`
-align-items: center;
-display:inline-block;
-padding:0.35em 1.2em;
-border:0.1em solid #FFFFFF;
-margin:0 0.3em 0.3em 0;
- border-radius:0.12em;
- box-sizing: border-box;
- text-decoration:none;
- font-family:'Roboto',sans-serif;
- font-weight:300;
- color: black;
- text-align:center;
- transition: all 0.2s;
+  align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
   margin-top: 2px;
   margin-bottom: 2px;
   padding: 5px 32px;
@@ -129,7 +137,8 @@ margin:0 0.3em 0.3em 0;
 
 
 const SideNav = styled.div`
-  overflow-y:scroll;
+  /* overflow-y:scroll;
+  height: 4000px; */
   display: flex;
   width: 240px;
   flex-direction: column;
@@ -138,10 +147,6 @@ const SideNav = styled.div`
   @media only screen and (min-width: 50px) and (max-width: 530px) {
     margin: 0px;
     align-items: center;
-  }
-
-  &:after {
-
   }
 `;
 
