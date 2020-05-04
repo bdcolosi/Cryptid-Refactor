@@ -5,9 +5,9 @@ import user from "./user.png";
 const SingleChannel = (props) => {
   return (
     <UserWapper>
-      <ImageWrapper>
+      {/* <ImageWrapper>
         <UserImage src={user} atl="user image" className="channelImage" />
-      </ImageWrapper>
+      </ImageWrapper> */}
       <InfoWrapper>
         <UserName>{props.eachChannel}</UserName>
       </InfoWrapper>
@@ -20,28 +20,30 @@ const UserWapper = styled.a`
   text-decoration: none;
   font-size: 25px;
   color: #818181;
-  display: block;
+  display: flex;
+  flex-direction: column;
   border: 2px solid blue;
   border-radius: 5px;
+  box-sizing: border-box;
   @media only screen and (min-width: 50px) and (max-width: 530px) {
     display: flex;
     flex-direction: column;
   }
 `;
-const ImageWrapper = styled.div``;
+// const ImageWrapper = styled.div``;
 
-const UserImage = styled.img`
-  float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
-  margin-top: 10px;
-  border-radius: 50%;
-  @media only screen and (min-width: 50px) and (max-width: 530px) {
-    height: 100%;
-    margin: 0px;
-  }
-`;
+// const UserImage = styled.img`
+//   float: left;
+//   max-width: 60px;
+//   width: 100%;
+//   margin-right: 20px;
+//   margin-top: 10px;
+//   border-radius: 50%;
+//   @media only screen and (min-width: 50px) and (max-width: 530px) {
+//     height: 100%;
+//     margin: 0px;
+//   }
+// `;
 const InfoWrapper = styled.div``;
 const UserName = styled.p`
   margin: 3px;
