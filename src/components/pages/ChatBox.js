@@ -196,8 +196,7 @@ const InnerBox = styled.section`
 const InnerBoxWrapper = styled.section`
       display: flex;
       height: 90vh;
-      background: black;
-      opacity: 0.5;
+      background-color: rgba(0,0,0,0.5);
     
     `;
 
