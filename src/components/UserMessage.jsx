@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { Store, CTX } from './Store'
+import { CTX } from './Store'
 import Emoji from "react-emoji-render";
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);
@@ -23,17 +23,21 @@ color: white;
 height: 50px;
 width: 50px;
 margin-right: 50px;
+font-size: 18px;
 `
 
 const UserMessageWrapper = styled.div`
 display: flex;
 height: 40px;
-width: 500px;
+width: 100%;
 color: white;
+background-color: (155, 155, 155, 0.95);
+
 `
 
 const UserMessageStyle = styled.div`
 color: white;
+font-size: 18px;
 
 
 `

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import user from "./user.png";
 
 const SingleChannel = (props) => {
   return (
@@ -16,18 +15,27 @@ const SingleChannel = (props) => {
 };
 
 const UserWapper = styled.a`
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid blue;
-  border-radius: 5px;
+  align-items: center;
+  display:inline-block;
+  /* padding:0.35em 1.2em; */
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
   box-sizing: border-box;
-  @media only screen and (min-width: 50px) and (max-width: 530px) {
-    display: flex;
-    flex-direction: column;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+  width: 100%;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
   }
 `;
 // const ImageWrapper = styled.div``;
@@ -44,28 +52,10 @@ const UserWapper = styled.a`
 //     margin: 0px;
 //   }
 // `;
+
 const InfoWrapper = styled.div``;
 const UserName = styled.p`
   margin: 3px;
-
-  @media only screen and (min-width: 50px) and (max-width: 530px) {
-    display: none;
-  }
 `;
-// const LastMessage = styled.p`
-//     font-size: 12px;
-//     margin-top: 4px;
-//     @media only screen and (min-width : 50px) and (max-width : 530px){
-//         display: none;
-//     }
-// `
-// const Time = styled.p`
-//     font-size: 10px;
-//     margin: 0px;
-//     margin-bottom: 5px;
-//     @media only screen and (min-width : 50px) and (max-width : 530px){
-//         display: none;
-//     }
-// `
 
 export default SingleChannel;

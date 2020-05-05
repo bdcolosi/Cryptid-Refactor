@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Sidebar from "../Sidebar";
 import UserMessage from "../UserMessage";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
+import monster from "../monster3.png"
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faPlus } from '@fortawesome/free-solid-svg-icons'
+// import InputAddon from '../InputAddon'
 
 
 
@@ -26,8 +27,8 @@ const ChatBox = () => {
       console.log("chat message recieved")
       dispatch('RECEIVE_MESSAGE', msg);
     })
-  }, [])
-
+  })
+  
   let newUserName = ""
   const userNameChanger = e => {
     newUserName = e.target.value;
@@ -42,17 +43,17 @@ const ChatBox = () => {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ channel: state.selectedChannel, password: passwordValue })
+    },
+      body: JSON.stringify({channel: state.selectedChannel, password: passwordValue})
     }
     const response = await fetch('http://localhost:3001/login', requestOptions)
 
-    if (response.status === 200) {
+    if(response.status === 200) {
       dispatch('SET_USER_VALID')
     }
     setPasswordValue('');
-
-    console.log('response', response)
+    
+    console.log('response',response)
   }
 
 
@@ -70,8 +71,8 @@ const ChatBox = () => {
   const onChangeHandler = e => {
     changeTextValue(e.target.value);
   }
-
-  const { isVerified, selectedChannel } = state;
+  
+  const {isVerified, selectedChannel} = state;
   console.log(state)
 
   return (
@@ -79,59 +80,92 @@ const ChatBox = () => {
     <Layout>
       <Sidebar />
       <Wrapper>
-        {isVerified ?
-          <InnerBoxWrapper>
-            <InnerBox>
-              <UserMessage />
-              <InputWrapper>
-                <Input
-                  label="Send a chat"
-                  onChange={onChangeHandler}
-                  value={textValue}
-                  onKeyPress={onKeyPressHandler}
-                />
-              </InputWrapper>
-            </InnerBox>
-          </InnerBoxWrapper>
-          :
-          selectedChannel ?
-            <MyDiv>
-              <WrapperLogin>
-                <PleaseLogin> Please login to channel: {selectedChannel}</PleaseLogin>
-                <PleaseLoginInput
-                  value={passwordValue}
-                  onChange={(e) => {
-                    setPasswordValue(e.target.value)
-                  }}
-                />
-                <PleaseLoginButton
-                  onClick={submitPasswordHandler}
-                >Submit</PleaseLoginButton>
-                <SetUsernameLabel> Want to set your username for channel {selectedChannel}?</SetUsernameLabel>
-                <SetUsernameInput
-                  onChange={userNameChanger}
-
-                />
-                <SetUsernameButton
-                  onClick={() => {
-                    usernameCreator(newUserName)
-                  }}
-                >Submit</SetUsernameButton>
-              </WrapperLogin>
-            </MyDiv>
-
-            :
-            null
-        }
+      {isVerified ?
+        <InnerBoxWrapper>
+          <InnerBox>
+            <AllUserMessages>
+              <UserMessage/>
+            </AllUserMessages>
+            <InputWrapper>
+              <TheInput
+                label="Send a chat"
+                onChange={onChangeHandler}
+                value={textValue}
+                onKeyPress={onKeyPressHandler}
+              />
+            </InputWrapper>
+          </InnerBox>
+        </InnerBoxWrapper>
+      :
+        selectedChannel ?
+        <MyDiv>
+          <WrapperLogin>
+          <Title>Welcome to Cryptid!</Title>
+          <img src={monster} alt="monster logo"></img>
+          <PleaseTitle>Please login to:</PleaseTitle>
+          <PleaseLogin>{selectedChannel}</PleaseLogin>
+          <PleaseLoginInput
+            value={passwordValue} 
+            type="password"
+            placeholder="Enter the password"
+            onChange={(e)=>{
+              setPasswordValue(e.target.value)
+            }}
+          />
+          <PleaseLoginButton
+            onClick={submitPasswordHandler}
+          >Submit</PleaseLoginButton>
+          <SetUsernameLabel>You are: {state.user}</SetUsernameLabel>
+          <SetUsernameInput 
+            onChange={userNameChanger}
+            placeholder="Change username"
+          />
+          <SetUsernameButton
+            onClick={() => {
+              usernameCreator(newUserName)}}
+          >Submit</SetUsernameButton>
+          </WrapperLogin>
+        </MyDiv>
+        
+        :
+        null
+      }
       </Wrapper>
     </Layout>
   )
 }
 
+const TheInput = styled.input`
+  border:0.1em solid #FFFFFF;
+  border-radius: 64px;
+  width: 100%;
+  height: 20px;
+  margin-left: 3px;
+  font-size: 20px;
+`
+
+
+const PleaseTitle = styled.div`
+  font-size: 18px;
+  padding-top: 5px;
+  font-family: 'Creepster', cursive;
+`;
+
+const Title = styled.div`
+  font-family: 'Creepster', cursive;
+  padding-bottom: 5px;
+  font-size: 64px;
+`;
+
+const AllUserMessages = styled.div`
+  padding-bottom: 12px;
+  padding-left: 6px;
+`;
+
 const MyDiv = styled.div`
   height: 100%;
   width: 100%;
-  background: purple;
+  background: rgb(0, 0, 0, 1);
   display: flex;
   justify-content: center;
 `;
@@ -141,35 +175,92 @@ const WrapperLogin = styled.div`
   flex-direction: column;
   text-align: center;
   width: 30%;
-  margin-top: 100px;
+  margin-top: 60px;
+  color: white;
+  font-size:48px;
+  width: 100%;
+  align-items: center;
+  font-family:'Roboto',sans-serif;
 `;
 
 const PleaseLogin = styled.div`
+font-family: 'Creepster', cursive;
 `;
 
 const PleaseLoginInput = styled.input`
+  width: 200px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-family:'Roboto',sans-serif;
 `;
 
 const PleaseLoginButton = styled.button`
+  align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 10px;
+  padding: 5px 32px;
+  width: 200px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 
 const SetUsernameLabel = styled.div`
+  font-family: 'Creepster', cursive;
+  font-size: 24px;
 `;
 
 const SetUsernameInput = styled.input`
+  width: 200px;
+  height: 20px;
+  font-size: 18px;
+  text-align: center;
 `;
 
 const SetUsernameButton = styled.button`
+  align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+  width: 200px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 
 const Layout = styled.section`
       height: 100vh;
       margin: 0;
-      background: #7f7fd5;
-      background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-      background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-      border-radius: 15px !important;
-      background-color: rgba(0, 0, 0, 0.4) !important;
+      background-color: #b60a1c;
       display: flex;
     `;
 
@@ -184,7 +275,7 @@ const Wrapper = styled.section`
   border-bottom: 0 !important;
   width: 100%;
   margin-left: 1vw;
-  margin-right: 15vw;
+  margin-right: 1vw;
 `;
 
 const InnerBox = styled.section`
@@ -195,31 +286,23 @@ const InnerBox = styled.section`
 
 const InnerBoxWrapper = styled.section`
       display: flex;
-      height: 90vh;
-      background-color: rgba(0,0,0,0.5);
+      height: 100vh;
+      width: 100%;
+      background: black;
+      opacity: 0.5;
     
     `;
 
 const InputWrapper = styled.div`
-display: flex;
-justify-content: center;
+  width: 98%;
+  padding-bottom: 2px;
     `
 
-const InputAddons = styled.div`
-margin-right: 3px;
-height: 16px;
-width: 14px;
-color: white;
-    `
+// const InputAddons = styled.div`
+// margin-right: 3px;
+// height: 16px;
+// width: 14px;
+// color: white;
+//     `;
 
-const Input = styled.input`
-  background-color: gray;
-  color: ${props => props.inputColor || "white"};
-  border-radius: 5px;
-  opacity: 10 !important; 
-  height: 3vh;
-  width: 20vw;
-margin: 5px;
-`;
-const MessageBox = styled.input``;
 export default ChatBox;
