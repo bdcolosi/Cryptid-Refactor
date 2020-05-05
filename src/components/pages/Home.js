@@ -2,17 +2,22 @@ import React from 'react'
 import styled from "styled-components";
 import Background from './images/Cryptid.png'
 import { createGlobalStyle } from 'styled-components'
+import { useHistory } from "react-router-dom";
 
 
 const Home = () => {
+    let history = useHistory();
 
+    function handleClick() {
+        history.push("/chat");
+    }
     return (
 
         <Container>
             <GlobalStyle />
             <InnerContainer>
                 <ButtonWrapper>
-                    <JoinButton>Join</JoinButton>
+                    <JoinButton onClick={handleClick}>Open Cryptid</JoinButton>
                 </ButtonWrapper>
                 <OutterContainer>
                     <CryptidInfo><p> Cryptid chat is great for quick conversations, in a secure location
@@ -76,8 +81,6 @@ const JoinButton = styled.button`
 background: ${props => props.primary ? "palevioletred" : "white"};
   color: ${props => props.primary ? "white" : "palevioletred"};
 
-  height: 30px;
-  width: 100px;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
@@ -88,9 +91,9 @@ background: ${props => props.primary ? "palevioletred" : "white"};
 const ButtonWrapper = styled.div`
 display: flex;
 height: 30px;
-width: 100px;
+width: 200px;
 margin-top: 100px;
-margin-left: 50px;
+margin-left: 53px;
 padding: auto;
 justify-content: center;
 align-items: center;
