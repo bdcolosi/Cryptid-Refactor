@@ -10,10 +10,11 @@ const Home = () => {
 
         <Container>
             <GlobalStyle />
-            <OutterContainer>
-                <CryptidInfo><p>test</p></CryptidInfo>
-            </OutterContainer>
             <InnerContainer>
+                <OutterContainer>
+                    <CryptidInfo><p> Cryptid chat is great for quick conversations, in a secure location
+        between clients.</p></CryptidInfo>
+                </OutterContainer>
                 <Logo />
             </InnerContainer>
         </Container>
@@ -31,8 +32,7 @@ const GlobalStyle = createGlobalStyle`
 const OutterContainer = styled.div`
 display: flex;
 justify-content: center;
-height: 100%;
-width: 100%;
+height: 40vh;
 `;
 
 const Container = styled.div`
@@ -46,19 +46,23 @@ justify-content:center;
 align-items:center;
 height: 100%;
 width: 100%;
+
+position: absolute;
 `;
 
 const Logo = styled.div`
 
-border: 1px solid red;
+/* border: 1px solid red; */
 /* margin: auto;
 padding: auto; */
 height: 100px;
-width: 400px;
+width: 500px;
 background-image: url(${ Background});
+margin-right: 30vw;
 `
 
-const CryptidInfo = styled.section`
+const CryptidInfo = styled.h3`
 color: white;
+font-family: 'Montserrat', sans-serif;
 `
 export default Home;
