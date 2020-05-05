@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Sidebar from "../Sidebar";
+import Channels from "../Channels";
 import UserMessage from "../UserMessage";
 import monster from "../monster3.png"
 import skel from "../skel.png"
@@ -48,8 +48,15 @@ const ChatBox = () => {
     
     console.log('response',response)
   }
-
-
+  const hideChannels = e => {
+    if (state.sideBarToggle === false) {
+      dispatch("SET_SIDEBAR_TOGGLE_T")
+    } else {
+      dispatch("SET_SIDEBAR_TOGGLE_F")
+    }
+    console.log(state.sideBarToggle)
+  }
+  
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -67,7 +74,7 @@ const ChatBox = () => {
 
   return (
     <Layout>
-      <Sidebar />
+      <Channels />
       <Wrapper>
       {isVerified ?
         <InnerBoxWrapper>
@@ -88,6 +95,10 @@ const ChatBox = () => {
       :
         selectedChannel ?
         <MyDiv>
+          <MobileToggle
+            onClick={() => {
+            hideChannels()
+            }}> Toggle Sidebar</MobileToggle>
           <WrapperLogin>
           <Title>Welcome to Cryptid!</Title>
           {showError ?
@@ -127,7 +138,9 @@ const ChatBox = () => {
     </Layout>
   )
 }
-
+const MobileToggle = styled.button`
+  /* display: hidden; */
+`;
 const TheInput = styled.input`
   border:0.1em solid #FFFFFF;
   border-radius: 64px;

@@ -7,7 +7,6 @@ const Sidebar = () => {
   const { state, dispatch } = React.useContext(CTX);
   const [channelValue, setChannelValue] = React.useState('');
   const [passwordValue, setPasswordValue] = React.useState('');
-
   React.useEffect(() => {
     state.socket.on('channels', function (channels) {
       console.log("channels recieved")
@@ -35,7 +34,14 @@ const Sidebar = () => {
   const passwordHandler = e => {
     setPasswordValue(e.target.value)
   }
-
+  const hideChannels = e => {
+    if (state.sideBarToggle === false) {
+      dispatch("SET_SIDEBAR_TOGGLE_T")
+    } else {
+      dispatch("SET_SIDEBAR_TOGGLE_F")
+    }
+    console.log(state.sideBarToggle)
+  }
   const createChannel = async () => {
 
     const requestOptions = {
@@ -50,6 +56,8 @@ const Sidebar = () => {
     if (response.status === 200) {
 
       dispatch("SET_CHANNEL_NAME", channelValue)
+      dispatch("SET_SELECTED_CHANNEL", channelValue)
+      dispatch("RESET_ERROR");
     }
     setChannelValue('')
     setPasswordValue('')
@@ -58,6 +66,10 @@ const Sidebar = () => {
   return (
     <SideNav>
       <AddChannelWrapper>
+      <MobileToggle
+        onClick={() => {
+          hideChannels()
+        }}> Toggle Sidebar</MobileToggle>
         <ChannelInputForm>
           <Label>Add a channel?</Label><br></br>
           <input type="text"
@@ -77,6 +89,7 @@ const Sidebar = () => {
           Add channel
         </ButtonWrapper>
 
+        
       </AddChannelWrapper>
       <AllSingleChannels>
       {channel && channel.map((eaChannel, i) => (
@@ -89,10 +102,14 @@ const Sidebar = () => {
           <SingleChannel eachChannel={eaChannel} key={i} />
         </SingleChannelWrapper>
       ))}
-      </AllSingleChannels>
+      </AllSingleChannels> 
     </SideNav>
   );
 };
+
+const MobileToggle = styled.button`
+  /* display: hidden; */
+`;
 
 const AllSingleChannels = styled.div`
   overflow-y: scroll;
