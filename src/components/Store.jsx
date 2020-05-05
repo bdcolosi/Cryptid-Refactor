@@ -10,7 +10,6 @@ const initState = {
   allChats: null,
 };
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "SET_CHANNEL_NAME":
       const newChannelName = action.payload;
@@ -59,7 +58,6 @@ const reducer = (state, action) => {
     case "RECEIVE_CHANNELS":
       const channels = action.payload;
       const newObj = {};
-      console.log(channels)
       channels.forEach(channel => {
         newObj[channel.channel] = [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}];
       })
@@ -72,10 +70,6 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
-// const sendChatAction = (value) => {
-//     socket.emit('chat message', value);
-// }
 
 export const Store = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initState);

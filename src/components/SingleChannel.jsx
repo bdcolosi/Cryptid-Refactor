@@ -4,9 +4,6 @@ import styled from "styled-components";
 const SingleChannel = (props) => {
   return (
     <UserWapper>
-      {/* <ImageWrapper>
-        <UserImage src={user} atl="user image" className="channelImage" />
-      </ImageWrapper> */}
       <InfoWrapper>
         <UserName>{props.eachChannel}</UserName>
       </InfoWrapper>
@@ -17,7 +14,6 @@ const SingleChannel = (props) => {
 const UserWapper = styled.a`
   align-items: center;
   display:inline-block;
-  /* padding:0.35em 1.2em; */
   border:0.1em solid #FFFFFF;
   margin:0 0.3em 0.3em 0;
   border-radius:0.12em;
@@ -38,22 +34,9 @@ const UserWapper = styled.a`
     color: white;
   }
 `;
-// const ImageWrapper = styled.div``;
-
-// const UserImage = styled.img`
-//   float: left;
-//   max-width: 60px;
-//   width: 100%;
-//   margin-right: 20px;
-//   margin-top: 10px;
-//   border-radius: 50%;
-//   @media only screen and (min-width: 50px) and (max-width: 530px) {
-//     height: 100%;
-//     margin: 0px;
-//   }
-// `;
 
 const InfoWrapper = styled.div``;
+
 const UserName = styled.p`
   margin: 3px;
 `;

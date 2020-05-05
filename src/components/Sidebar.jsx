@@ -9,7 +9,6 @@ const Sidebar = () => {
   const [passwordValue, setPasswordValue] = React.useState('');
 
   React.useEffect(() => {
-    console.log('SIDEBAR')
     state.socket.on('channels', function (channels) {
       console.log("channels recieved")
       dispatch('RECEIVE_CHANNELS', channels);

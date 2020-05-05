@@ -3,25 +3,15 @@ import styled from "styled-components";
 import Sidebar from "../Sidebar";
 import UserMessage from "../UserMessage";
 import monster from "../monster3.png"
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faPlus } from '@fortawesome/free-solid-svg-icons'
-// import InputAddon from '../InputAddon'
-
-
-
 
 import { CTX } from '../Store'
-
 
 const ChatBox = () => {
   const [textValue, changeTextValue] = React.useState('');
   const [passwordValue, setPasswordValue] = React.useState('');
 
-
   const { state, dispatch } = React.useContext(CTX);
-  console.log(state.user)
   React.useEffect(() => {
-    console.log(state.user)
 
     state.socket.on('message', function (msg) {
       console.log("chat message recieved")
@@ -37,6 +27,7 @@ const ChatBox = () => {
   const usernameCreator = (newUserName) => {
     dispatch('SET_USER_NAME', newUserName)
   };
+
   const submitPasswordHandler = async () => {
     console.log("SELECTED CHANNEL", state.selectedChannel)
     const requestOptions = {
@@ -61,7 +52,6 @@ const ChatBox = () => {
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      console.log("PRESSED")
       state.socket.emit('sent message', { from: state.user, msg: textValue, channel: state.selectedChannel });
       dispatch('RECEIVE_MESSAGE', { from: state.user, msg: textValue, channel: state.selectedChannel });
       changeTextValue('')
@@ -73,10 +63,8 @@ const ChatBox = () => {
   }
   
   const {isVerified, selectedChannel} = state;
-  console.log(state)
 
   return (
-
     <Layout>
       <Sidebar />
       <Wrapper>
@@ -143,7 +131,6 @@ const TheInput = styled.input`
   margin-left: 3px;
   font-size: 20px;
 `
-
 
 const PleaseTitle = styled.div`
   font-size: 18px;
@@ -268,7 +255,6 @@ const Wrapper = styled.section`
   margin-top: auto;
   margin-bottom: auto;
   height:100%;
-  /* padding: 0.75rem 0 !important; */
   overflow-y: auto;
   white-space: nowrap;
   border-radius: 15px 15px 0 0 !important;
@@ -297,12 +283,5 @@ const InputWrapper = styled.div`
   width: 98%;
   padding-bottom: 2px;
     `
-
-// const InputAddons = styled.div`
-// margin-right: 3px;
-// height: 16px;
-// width: 14px;
-// color: white;
-//     `;
 
 export default ChatBox;
