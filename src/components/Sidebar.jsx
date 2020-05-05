@@ -66,10 +66,10 @@ const Sidebar = () => {
   return (
     <SideNav>
       <AddChannelWrapper>
-      <MobileToggle
-        onClick={() => {
-          hideChannels()
-        }}> Toggle Sidebar</MobileToggle>
+          <MobileToggle
+            onClick={() => {
+              hideChannels()
+            }}> Toggle Sidebar</MobileToggle>
         <ChannelInputForm>
           <Label>Add a channel?</Label><br></br>
           <input type="text"
@@ -108,17 +108,38 @@ const Sidebar = () => {
 };
 
 const MobileToggle = styled.button`
-  /* display: hidden; */
+    align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 
 const AllSingleChannels = styled.div`
   overflow-y: scroll;
   text-align: center;
+  
 `;
 
 
 const AddChannelWrapper = styled.div`
-align-self: center;
+align-self: left;
 padding-bottom: 10px;
 padding-top: 5px;
 `;
@@ -133,7 +154,7 @@ const Label = styled.label`
 `;
 
 const SingleChannelWrapper = styled.button`
-  width: 80%;
+  width: 75%;
 `;
 
 const ButtonWrapper = styled.button`
@@ -165,7 +186,7 @@ const SideNav = styled.div`
   /* overflow-y:scroll;
   height: 4000px; */
   display: flex;
-  width: 240px;
+  width: 180px;
   flex-direction: column;
   background-color: rgb(0, 0, 0, 1);
   border-radius: 15px 15px 0 0 !important;

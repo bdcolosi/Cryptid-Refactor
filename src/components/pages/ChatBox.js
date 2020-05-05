@@ -56,7 +56,7 @@ const ChatBox = () => {
     }
     console.log(state.sideBarToggle)
   }
-  
+
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -74,7 +74,7 @@ const ChatBox = () => {
 
   return (
     <Layout>
-      <Channels />
+      <NewChannels />
       <Wrapper>
       {isVerified ?
         <InnerBoxWrapper>
@@ -95,12 +95,12 @@ const ChatBox = () => {
       :
         selectedChannel ?
         <MyDiv>
+          <WrapperLogin>
+          <Title>Welcome to Cryptid!</Title>
           <MobileToggle
             onClick={() => {
             hideChannels()
             }}> Toggle Sidebar</MobileToggle>
-          <WrapperLogin>
-          <Title>Welcome to Cryptid!</Title>
           {showError ?
           <img src={skel} alt="monster logo"></img>
         :
@@ -138,8 +138,33 @@ const ChatBox = () => {
     </Layout>
   )
 }
+
+const NewChannels = styled(Channels)`
+  overflow-x: none;
+`
+
 const MobileToggle = styled.button`
-  /* display: hidden; */
+    align-items: center;
+  display:inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #FFFFFF;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.12em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:300;
+  color: black;
+  text-align:center;
+  transition: all 0.2s;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding: 5px 32px;
+
+  &:hover {
+    background-color: #b60a1c;
+    color: white;
+  }
 `;
 const TheInput = styled.input`
   border:0.1em solid #FFFFFF;

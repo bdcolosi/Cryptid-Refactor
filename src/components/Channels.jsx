@@ -4,21 +4,28 @@ import Sidebar from "./Sidebar";
 import { CTX } from './Store';
 
 const Channels = () => {
-    const { state, dispatch } = React.useContext(CTX);
+    const { state } = React.useContext(CTX);
 
 
 
     const { sideBarToggle } = state;
     return (
-        <div>
+        <Div>
             {sideBarToggle ?
                 <Sidebar/>
             :
-            <ClosedSideBar/>
+                <ClosedSideBar/>
             }
-        </div>
+        </Div>
     )
 }
+
+const Div = styled.div`
+    overflow-y: scroll;
+    text-align: center;
+    /* display: none; */
+    overflow-x: hidden;
+`
 
 const ClosedSideBar = styled.div`
     display: none;
