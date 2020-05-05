@@ -22,6 +22,7 @@ const Sidebar = () => {
   }
   const changeActiveChannel = (eaChannel) => {
     dispatch("SET_SELECTED_CHANNEL", eaChannel);
+    dispatch("RESET_ERROR");
   };
   const onKeyPressHandler = (e) => {
     if (e.key === 'Enter') {

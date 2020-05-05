@@ -3,13 +3,13 @@ import styled from "styled-components";
 import Sidebar from "../Sidebar";
 import UserMessage from "../UserMessage";
 import monster from "../monster3.png"
+import skel from "../skel.png"
 
 import { CTX } from '../Store'
 
 const ChatBox = () => {
   const [textValue, changeTextValue] = React.useState('');
   const [passwordValue, setPasswordValue] = React.useState('');
-
   const { state, dispatch } = React.useContext(CTX);
   React.useEffect(() => {
 
@@ -40,13 +40,14 @@ const ChatBox = () => {
     const response = await fetch('http://localhost:3001/login', requestOptions)
 
     if(response.status === 200) {
-      dispatch('SET_USER_VALID')
+      dispatch('SET_USER_VALID');
+    } else {
+      dispatch('SET_ERROR');
     }
     setPasswordValue('');
     
     console.log('response',response)
   }
-
 
 
   const onKeyPressHandler = (e) => {
@@ -62,7 +63,7 @@ const ChatBox = () => {
     changeTextValue(e.target.value);
   }
   
-  const {isVerified, selectedChannel} = state;
+  const {isVerified, selectedChannel, showError} = state;
 
   return (
     <Layout>
@@ -89,7 +90,11 @@ const ChatBox = () => {
         <MyDiv>
           <WrapperLogin>
           <Title>Welcome to Cryptid!</Title>
+          {showError ?
+          <img src={skel} alt="monster logo"></img>
+        :
           <img src={monster} alt="monster logo"></img>
+        }
           <PleaseTitle>Please login to:</PleaseTitle>
           <PleaseLogin>{selectedChannel}</PleaseLogin>
           <PleaseLoginInput

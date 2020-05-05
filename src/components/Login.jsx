@@ -7,7 +7,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: "",
+      channel: "",
       password: "",
     };
     this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -35,17 +35,13 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log("hello");
 
     const user = {
       username: this.state.username,
       password: this.state.password,
     };
 
-    console.log("user is", user);
-
     login(user).then((res) => {
-      console.log("hello");
     });
   }
 

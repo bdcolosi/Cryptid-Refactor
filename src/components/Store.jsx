@@ -8,6 +8,7 @@ const initState = {
   socket: io(":3001"),
   user: "Anonymous",
   allChats: null,
+  showError: false
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -45,6 +46,16 @@ const reducer = (state, action) => {
       return {
         ...state,
         isVerified: true,
+      }
+    case "SET_ERROR":
+      return {
+        ...state,
+        showError: true,
+      }
+    case "RESET_ERROR":
+      return {
+        ...state,
+        showError: false,
       }
     case "RECEIVE_MESSAGE":
       const { from, msg, channel } = action.payload;
