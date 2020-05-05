@@ -2,6 +2,7 @@ import React from 'react';
 import ChatBox from './components/pages/ChatBox';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Home from './components/pages/Home'
 
 import {
   BrowserRouter as Router,
@@ -13,18 +14,11 @@ import {
 const AppRouter = () => {
 
   return (
-      <Router>
-        <Switch>
-          <Route path="/chat">
-            <ChatBox />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/chat" component={ChatBox} />
+      </Switch>
     </Router>
   )
 }
