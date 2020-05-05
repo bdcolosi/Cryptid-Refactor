@@ -1,7 +1,7 @@
 CRYPTID CHAT- ANONYMOUS CHAT MESSAGING APP (BEWARE)!!!
 
 
-##WHAT IT IS 
+#WHAT IT IS 
 
 cryptid noun
 cryp·​tid | \ ˈkrip-təd\
