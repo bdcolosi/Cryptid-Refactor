@@ -11,12 +11,17 @@ const Home = () => {
         <Container>
             <GlobalStyle />
             <InnerContainer>
+                <ButtonWrapper>
+                    <JoinButton>Join</JoinButton>
+                </ButtonWrapper>
                 <OutterContainer>
                     <CryptidInfo><p> Cryptid chat is great for quick conversations, in a secure location
         between clients.</p></CryptidInfo>
+
                 </OutterContainer>
                 <Logo />
             </InnerContainer>
+
         </Container>
     )
 
@@ -51,18 +56,44 @@ position: absolute;
 `;
 
 const Logo = styled.div`
-
-/* border: 1px solid red; */
-/* margin: auto;
-padding: auto; */
 height: 100px;
-width: 500px;
+width: 550px;
 background-image: url(${ Background});
-margin-right: 30vw;
+margin-right: 34vw;
+background-repeat: no-repeat;
 `
 
-const CryptidInfo = styled.h3`
+const CryptidInfo = styled.h2`
 color: white;
 font-family: 'Montserrat', sans-serif;
+padding: 2px;
+margin: 2px;
+`
+
+const JoinButton = styled.button`
+
+/* Adapt the colors based on primary prop */
+background: ${props => props.primary ? "palevioletred" : "white"};
+  color: ${props => props.primary ? "white" : "palevioletred"};
+
+  height: 30px;
+  width: 100px;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`
+
+const ButtonWrapper = styled.div`
+display: flex;
+height: 30px;
+width: 100px;
+margin-top: 100px;
+margin-left: 50px;
+padding: auto;
+justify-content: center;
+align-items: center;
+position: absolute;
 `
 export default Home;
