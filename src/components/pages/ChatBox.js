@@ -27,7 +27,7 @@ const ChatBox = () => {
       console.log("chat message recieved")
       dispatch('RECEIVE_MESSAGE', msg);
     })
-  }, [])
+  })
   
   let newUserName = ""
   const userNameChanger = e => {
@@ -305,6 +305,4 @@ const InputWrapper = styled.div`
 // color: white;
 //     `;
 
-
-const MessageBox = styled.input``;
 export default ChatBox;

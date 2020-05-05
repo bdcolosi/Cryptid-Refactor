@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
-import { Store, CTX } from './Store'
+import { CTX } from './Store'
 import Emoji from "react-emoji-render";
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);

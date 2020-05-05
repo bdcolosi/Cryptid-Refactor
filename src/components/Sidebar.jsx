@@ -14,7 +14,7 @@ const Sidebar = () => {
       console.log("channels recieved")
       dispatch('RECEIVE_CHANNELS', channels);
     })
-  }, [])
+  })
 
   let channel;
 
@@ -52,6 +52,7 @@ const Sidebar = () => {
       dispatch("SET_CHANNEL_NAME", channelValue)
     }
     setChannelValue('')
+    setPasswordValue('')
     console.log(response)
   }
   return (
