@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Background from './images/Cryptid.png'
 import { createGlobalStyle } from 'styled-components'
 import { useHistory } from "react-router-dom";
-
+import BigFoot from './images/bigfoot-silhouette-vector-11.png'
 
 const Home = () => {
     let history = useHistory();
@@ -25,6 +25,7 @@ const Home = () => {
 
                 </OutterContainer>
                 <Logo />
+                <BigFootWrapper><BigFootImage /></BigFootWrapper>
             </InnerContainer>
 
         </Container>
@@ -51,13 +52,7 @@ width: 100%;
 `;
 
 const InnerContainer = styled.div`
-display: flex;
-justify-content:center;
-align-items:center;
-height: 100%;
-width: 100%;
 
-position: absolute;
 `;
 
 const Logo = styled.div`
@@ -74,10 +69,26 @@ font-family: 'Montserrat', sans-serif;
 padding: 2px;
 margin: 2px;
 `
+const BigFootWrapper = styled.div`
+justify-content:center;
+align-items:center;
+height: 50%;
+width: 100%;
+
+position: absolute;
+`
+
+const BigFootImage = styled.div`
+ transform: scaleX(-1);
+height: 100%;
+width: 100%;
+background-repeat: no-repeat;
+background-image: url(${ BigFoot});
+`
 
 const JoinButton = styled.button`
 
-/* Adapt the colors based on primary prop */
+
 background: ${props => props.primary ? "palevioletred" : "white"};
   color: ${props => props.primary ? "white" : "palevioletred"};
 
