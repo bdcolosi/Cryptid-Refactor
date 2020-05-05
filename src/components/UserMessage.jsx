@@ -4,7 +4,6 @@ import { CTX } from './Store'
 import Emoji from "react-emoji-render";
 const UserMessage = () => {
     const { state, } = React.useContext(CTX);
-    console.log(state.allChats)
     return (
         <div>
             <div>
