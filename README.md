@@ -151,7 +151,7 @@ Our reducer:
       default:
         return state;
     }
-  };
+    };
 
     export const Store = (props) => {
       const [state, dispatch] = React.useReducer(reducer, initState);
@@ -165,7 +165,7 @@ Our reducer:
         {props.children}
       </CTX.Provider>
     );
-  };
+    };
 
   Our ChatBox: 
 
@@ -321,8 +321,8 @@ Our reducer:
         </Wrapper>
       </Layout>
     );
-  };
+    };
 
 
-export default ChatBox;
+
 
