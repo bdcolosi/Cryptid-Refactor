@@ -8,9 +8,10 @@ const initState = {
   socket: io(":3001"),
   user: "Anonymous",
   allChats: null,
+  showError: false,
+  sideBarToggle: true,
 };
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "SET_CHANNEL_NAME":
       const newChannelName = action.payload;
@@ -47,6 +48,26 @@ const reducer = (state, action) => {
         ...state,
         isVerified: true,
       }
+    case "SET_ERROR":
+      return {
+        ...state,
+        showError: true,
+      }
+    case "RESET_ERROR":
+      return {
+        ...state,
+        showError: false,
+      }
+    case "SET_SIDEBAR_TOGGLE_T":
+      return {
+        ...state,
+        sideBarToggle: true,
+      }
+    case "SET_SIDEBAR_TOGGLE_F":
+      return {
+        ...state,
+        sideBarToggle: false,
+      }
     case "RECEIVE_MESSAGE":
       const { from, msg, channel } = action.payload;
       return {
@@ -59,7 +80,6 @@ const reducer = (state, action) => {
     case "RECEIVE_CHANNELS":
       const channels = action.payload;
       const newObj = {};
-      console.log(channels)
       channels.forEach(channel => {
         newObj[channel.channel] = [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}];
       })
@@ -72,10 +92,6 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
-// const sendChatAction = (value) => {
-//     socket.emit('chat message', value);
-// }
 
 export const Store = (props) => {
   const [state, dispatch] = React.useReducer(reducer, initState);
