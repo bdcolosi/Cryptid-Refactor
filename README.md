@@ -35,5 +35,17 @@ Aaron Smith, Paxton Lindsey, and Brooke Colosi
 
 ##SCREENSHOTS
 
+![react](public/images/LogOnPage.png)
 
+## users can log into a chat using a password created with the channel.
 
+![react](public/images/LogOnPage2.png)
+
+## if user inserts the wrong password, it will notifiy you our icon turning into a skull cyclops!
+
+![react](public/images/username1.png)
+![react](public/images/username2.png)
+
+## users can choose to stay anonymous or choose a temporary username for their session.
+
+##CODE
