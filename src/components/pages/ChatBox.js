@@ -17,7 +17,7 @@ const ChatBox = () => {
       console.log("chat message recieved")
       dispatch('RECEIVE_MESSAGE', msg);
     })
-  })
+  },[])
   
   let newUserName = ""
   const userNameChanger = e => {
