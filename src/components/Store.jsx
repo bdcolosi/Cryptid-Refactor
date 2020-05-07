@@ -19,16 +19,20 @@ const reducer = (state, action) => {
         ...state,
         allChats: {
           ...state.allChats,
-          [newChannelName]: [{from: "ChatBot", msg: "Welcome to a new chatroom!"}]
-        }
-      }
+          [newChannelName]: [
+            { from: "ChatBot", msg: "Welcome to a new chatroom!" },
+          ],
+        },
+      };
     case "CREATE_CHANNEL":
       return {
         ...state,
         allChats: {
           ...state.allChats,
-          newChannel: [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}]
-        }
+          newChannel: [
+            { from: "chatbot", msg: "Welcome to a new chatroom! Type away!" },
+          ],
+        },
       };
     case "SET_USER_NAME":
       const newUserName = action.payload;
@@ -47,27 +51,27 @@ const reducer = (state, action) => {
       return {
         ...state,
         isVerified: true,
-      }
+      };
     case "SET_ERROR":
       return {
         ...state,
         showError: true,
-      }
+      };
     case "RESET_ERROR":
       return {
         ...state,
         showError: false,
-      }
+      };
     case "SET_SIDEBAR_TOGGLE_T":
       return {
         ...state,
         sideBarToggle: true,
-      }
+      };
     case "SET_SIDEBAR_TOGGLE_F":
       return {
         ...state,
         sideBarToggle: false,
-      }
+      };
     case "RECEIVE_MESSAGE":
       const { from, msg, channel } = action.payload;
       return {
@@ -80,14 +84,16 @@ const reducer = (state, action) => {
     case "RECEIVE_CHANNELS":
       const channels = action.payload;
       const newObj = {};
-      channels.forEach(channel => {
-        newObj[channel.channel] = [ {from: "chatbot", msg: "Welcome to a new chatroom! Type away!"}];
-      })
+      channels.forEach((channel) => {
+        newObj[channel.channel] = [
+          { from: "chatbot", msg: "Welcome to a new chatroom! Type away!" },
+        ];
+      });
       return {
         ...state,
         allChats: newObj,
-        selectedChannel: channels[0].channel
-      }
+        selectedChannel: channels[0].channel,
+      };
     default:
       return state;
   }
